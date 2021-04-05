@@ -47,7 +47,7 @@ app.use(bodyParser.json())
 app.use(express.static('public'));
 connection.connect();
 app.post('/Register',function(req,res){
-    
+
     var id = req.body.id;
     var password = req.body.password;
     var passwordconfirm = req.body.passwordconfirm;
@@ -61,7 +61,7 @@ app.post('/Register',function(req,res){
         return;
     }
     if(password != passwordconfirm){
-       // res.send('비밀번호를 다시 입력해주세요 처리 ')
+        // res.send('비밀번호를 다시 입력해주세요 처리 ')
         res.write("<script language=\"javascript\">alert('there is not same the password and confrim password')</script>");
         res.write("<script language=\"javascript\">window.location=\"biomedical_register.html\"</script>")
         return;
@@ -77,7 +77,7 @@ app.post('/Register',function(req,res){
                 console.log(err);
             else {
                 console.log(rows);
-              //  res.send('회원가입이 완료되었습니다.');
+                //  res.send('회원가입이 완료되었습니다.');
                 res.write("<script language=\"javascript\">alert('Register is Success')</script>");
                 res.write("<script language=\"javascript\">window.location=\"biomedical_Login.html\"</script>");
             }
@@ -94,13 +94,13 @@ app.post('/Login',function(req,res){
     connection.query(sql,params,function(err,rows,fields){
         var user = rows[0];
         console.log(user);
-       if(user === undefined){
+        if(user === undefined){
             // 그런 유저는 없다고요.
             //res.send('nope');
             res.write("<script language=\"javascript\">alert('ID is wrong')</script>");
             res.write("<script language=\"javascript\">window.location=\"biomedical_Login.html\"</script>")
             return;
-       }
+        }
         if(user.pw == password) {
             res.redirect('/');
             res.end();
@@ -115,12 +115,12 @@ app.post('/Login',function(req,res){
             //res.json({success:false});
             //redirect 안되는 문제 발생
             //fs.readFile('./public/data/pw.json',function (err,data) {
-               // var temp = '{"results": "false"}';
-               // fs.writeFileSync('./public/data/pw.json',temp);
-                //console.log('completed');
-                //res.redirect('/biomedical_Login.html');
-                //res.Write("<script language=\"javascript\">alert('테스트')</script>");
-                //res.Write("<script language=\"javascript\">window.location=\"biomedical_Login.html\"</script>");
+            // var temp = '{"results": "false"}';
+            // fs.writeFileSync('./public/data/pw.json',temp);
+            //console.log('completed');
+            //res.redirect('/biomedical_Login.html');
+            //res.Write("<script language=\"javascript\">alert('테스트')</script>");
+            //res.Write("<script language=\"javascript\">window.location=\"biomedical_Login.html\"</script>");
             //});
         }
     })
